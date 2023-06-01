@@ -9,6 +9,7 @@ plugins {
 //    kotlin("multiplatform") version kotlinVersion
 //    val kvisionVersion: String by System.getProperties()
 //    id("io.kvision") version kvisionVersion
+    id("io.kvision")
 }
 
 version = "1.0.0-SNAPSHOT"
@@ -22,6 +23,7 @@ repositories {
 
 // Versions
 val kotlinVersion: String by System.getProperties()
+val serializationVersion: String by System.getProperties()
 val kvisionVersion: String by System.getProperties()
 val ktorVersion: String by project
 val logbackVersion: String by project
@@ -71,6 +73,7 @@ kotlin {
             dependencies {
                 implementation(project(":mppLib"))
                 api("io.kvision:kvision-server-ktor-koin:$kvisionVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
             }
         }
         val commonTest by getting {

@@ -9,6 +9,8 @@ repositories {
     google()
 }
 
+val serializationVersion: String by System.getProperties()
+
 kotlin {
     jvm("backend") {
         compilations.all {
@@ -29,6 +31,11 @@ kotlin {
         publishLibraryVariants("release", "debug")
     }
     sourceSets {
+        val commonMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
+            }
+        }
         val backendMain by getting
         val frontendMain by getting
         val androidLibMain by getting
