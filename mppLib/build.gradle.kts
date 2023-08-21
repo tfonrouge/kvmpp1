@@ -12,7 +12,8 @@ repositories {
 val serializationVersion: String by System.getProperties()
 
 kotlin {
-    jvm("backend") {
+    jvmToolchain(17)
+    jvm {
         compilations.all {
             java {
                 targetCompatibility = JavaVersion.VERSION_17
@@ -23,11 +24,11 @@ kotlin {
             }
         }
     }
-    js("frontend") {
+    js(IR) {
         browser()
         binaries.library()
     }
-    android("androidLib") {
+    androidTarget("androidLib") {
         publishLibraryVariants("release", "debug")
     }
     sourceSets {
@@ -36,8 +37,8 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
             }
         }
-        val backendMain by getting
-        val frontendMain by getting
+        val jvmMain by getting
+        val jsMain by getting
         val androidLibMain by getting
     }
 }
